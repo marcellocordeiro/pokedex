@@ -1,0 +1,57 @@
+{
+  "root": true,
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    // "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    // Typescript
+    "@typescript-eslint/prefer-optional-chain": "warn",
+    // Typescript (requires type checking)
+    "@typescript-eslint/require-await": "warn",
+    "@typescript-eslint/consistent-type-exports": "warn",
+    "@typescript-eslint/await-thenable": "warn",
+    "@typescript-eslint/no-unnecessary-boolean-literal-compare": "warn",
+    "@typescript-eslint/no-unnecessary-condition": "warn",
+    "@typescript-eslint/no-unnecessary-type-assertion": "warn",
+    "@typescript-eslint/no-unsafe-return": "warn",
+    "@typescript-eslint/prefer-includes": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    "@typescript-eslint/unbound-method": "warn",
+    "@typescript-eslint/no-inferrable-types": "warn",
+
+    // React
+    "react/destructuring-assignment": "warn",
+
+    "arrow-body-style": "warn",
+    "sort-imports": ["warn", { "ignoreDeclarationSort": true }],
+    "object-shorthand": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}
