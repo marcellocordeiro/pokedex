@@ -27,7 +27,7 @@ const Home: NextPage<Props> = ({ data }) => {
       </Head>
 
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <div className="grid grid-cols-6 gap-4">{items}</div>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-6">{items}</div>
       </main>
 
       <footer className="flex h-24 w-full items-center justify-center border-t">
