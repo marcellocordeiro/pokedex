@@ -27,11 +27,17 @@ export const getPokemonList = async ({
     },
   });
 
-  const { previous, next, ...rest } = res.data;
+  const { previous, next, results, ...rest } = res.data;
+
+  // This should be optimised
+  const withImageUrl = await Promise.all(
+    results.map(({ name }) => getPokemon({ name }))
+  );
 
   return {
     previous: previous ? queryString.parseUrl(previous) : null,
     next: next ? queryString.parseUrl(next) : null,
+    results: withImageUrl,
     ...rest,
   };
 };
@@ -45,7 +51,7 @@ export const getPokemon = async ({
     id: number;
     name: string;
     sprites: {
-      front_default: string | null;
+      front_default: string;
     };
     [key: string]: unknown;
   };
@@ -56,6 +62,6 @@ export const getPokemon = async ({
   return {
     id: data.id,
     name: data.name,
-    sprites: { front_default: data.sprites.front_default },
+    imageUrl: data.sprites.front_default,
   };
 };

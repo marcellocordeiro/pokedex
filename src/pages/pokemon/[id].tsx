@@ -1,5 +1,6 @@
-import Image from "next/image";
+import NextImage from "next/image";
 
+import { Head } from "@/components/Head";
 import { getPokemon, getPokemonList } from "@/utils/pokeapi";
 
 import type { PokemonType } from "@/utils/types";
@@ -10,18 +11,22 @@ type Props = {
 };
 
 const PokemonDetails: NextPage<Props> = ({ data }) => (
-  <div className="flex flex-col items-start">
-    {data.sprites.front_default != null ? (
-      <Image
-        src={data.sprites.front_default}
-        alt={data.name}
-        width={128}
-        height={128}
-      />
-    ) : null}
+  <div className="container mx-auto">
+    <Head title={data.name} />
 
-    <div>Pokémon ID: {data.id}</div>
-    <div>Pokémon name: {data.name}</div>
+    <main>
+      <div className="flex flex-col items-start">
+        <NextImage
+          src={data.imageUrl}
+          alt={data.name}
+          width={128}
+          height={128}
+        />
+
+        <div>Pokémon ID: {data.id}</div>
+        <div>Pokémon name: {data.name}</div>
+      </div>
+    </main>
   </div>
 );
 
@@ -30,9 +35,9 @@ export default PokemonDetails;
 export const getStaticPaths: GetStaticPaths = async () => {
   const { results } = await getPokemonList();
 
-  const paths = results.map(({ name }) => ({
+  const paths = results.map(({ id }) => ({
     params: {
-      id: name,
+      id: id.toString(),
     },
   }));
 
@@ -42,7 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const id = params?.id as string;
 
   const data = await getPokemon({ name: id });
