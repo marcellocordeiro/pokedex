@@ -15,7 +15,7 @@ type Props = {
 const Home: NextPage<Props> = ({ data }) => {
   const items = data.results.map(({ id, name, imageUrl }) => (
     <NextLink key={id} href={`/pokemon/${id}`} passHref>
-      <a className="flex flex-col items-center justify-center capitalize">
+      <a className="flex flex-col items-center justify-center border capitalize shadow transition-transform hover:scale-105 hover:shadow-lg">
         <NextImage src={imageUrl} width={128} height={128} />
         {name}
       </a>
