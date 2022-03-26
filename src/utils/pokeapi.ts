@@ -31,7 +31,24 @@ export const getPokemonList = async ({
 
   // This should be optimised
   const withImageUrl = await Promise.all(
-    results.map(({ name }) => getPokemon({ name }))
+    results.map(async ({ url }) => {
+      type ResType = {
+        id: number;
+        name: string;
+        sprites: {
+          front_default: string;
+        };
+        [key: string]: unknown;
+      };
+
+      const { data } = await axios.get<ResType>(url);
+
+      return {
+        id: data.id,
+        name: data.name,
+        imageUrl: data.sprites.front_default,
+      };
+    })
   );
 
   return {
@@ -43,9 +60,9 @@ export const getPokemonList = async ({
 };
 
 export const getPokemon = async ({
-  name,
+  id,
 }: {
-  name: string;
+  id: string;
 }): Promise<PokemonType> => {
   type ResType = {
     id: number;
@@ -56,7 +73,7 @@ export const getPokemon = async ({
     [key: string]: unknown;
   };
 
-  const res = await api.get<ResType>(`/pokemon/${name}`);
+  const res = await api.get<ResType>(`/pokemon/${id}`);
   const data = res.data;
 
   return {

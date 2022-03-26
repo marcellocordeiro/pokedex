@@ -1,7 +1,7 @@
 import NextImage from "next/image";
 
 import { Head } from "@/components/Head";
-import { getPokemon, getPokemonList } from "@/utils/pokeapi";
+import { getPokemon } from "@/utils/pokeapi";
 
 import type { PokemonType } from "@/utils/types";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
@@ -32,25 +32,23 @@ const PokemonDetails: NextPage<Props> = ({ data }) => (
 
 export default PokemonDetails;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { results } = await getPokemonList();
+export const getStaticPaths: GetStaticPaths = () => ({
+  paths: [],
+  fallback: "blocking",
+});
+
+/*const { results } = await getPokemonList();
 
   const paths = results.map(({ id }) => ({
     params: {
       id: id.toString(),
     },
-  }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
+  }));*/
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const id = params?.id as string;
 
-  const data = await getPokemon({ name: id });
+  const data = await getPokemon({ id });
 
   return {
     props: {

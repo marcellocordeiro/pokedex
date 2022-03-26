@@ -1,25 +1,25 @@
-import NextImage from "next/image";
-import NextLink from "next/link";
+import axios from "axios";
 
 import { Footer } from "@/components/Footer";
 import { Head } from "@/components/Head";
-import { getPokemonList } from "@/utils/pokeapi";
+import { PokemonCard } from "@/features/pokemon/components/PokemonCard";
 
-import type { PokemonListType } from "@/utils/types";
 import type { GetStaticProps, NextPage } from "next";
 
+type ResType = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: { name: string; url: string }[];
+};
+
 type Props = {
-  data: PokemonListType;
+  data: ResType;
 };
 
 const Home: NextPage<Props> = ({ data }) => {
-  const items = data.results.map(({ id, name, imageUrl }) => (
-    <NextLink key={id} href={`/pokemon/${id}`} passHref>
-      <a className="flex flex-col items-center justify-center border capitalize shadow transition-transform hover:scale-105 hover:shadow-lg">
-        <NextImage src={imageUrl} width={128} height={128} />
-        {name}
-      </a>
-    </NextLink>
+  const items = data.results.map(({ url }) => (
+    <PokemonCard key={url} url={url} />
   ));
 
   return (
@@ -38,7 +38,22 @@ const Home: NextPage<Props> = ({ data }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const data = await getPokemonList();
+  type ResType = {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: { name: string; url: string }[];
+  };
+
+  const { data } = await axios.get<ResType>(
+    "https://pokeapi.co/api/v2/pokemon",
+    {
+      params: {
+        offset: 0,
+        limit: 60,
+      },
+    }
+  );
 
   return { props: { data } };
 };
