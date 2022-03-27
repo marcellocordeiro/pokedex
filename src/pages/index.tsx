@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     {
       params: {
         offset: 0,
-        limit: 60,
+        limit: 151,
       },
     }
   );

@@ -2,6 +2,11 @@ import useSWR from "swr";
 
 import { fetcher } from "@/utils/fetcher";
 
+const getImageUrl = (id: number) =>
+  `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id
+    .toString()
+    .padStart(3, "0")}.png`;
+
 const pokemonFetcher = async (url: string) => {
   type ResType = {
     id: number;
@@ -17,7 +22,7 @@ const pokemonFetcher = async (url: string) => {
   return {
     id: data.id,
     name: data.name,
-    imageUrl: data.sprites.front_default,
+    imageUrl: getImageUrl(data.id),
   };
 };
 
