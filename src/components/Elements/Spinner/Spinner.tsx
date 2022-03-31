@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { CgSpinner } from "react-icons/cg";
 
 const sizes = {
   sm: "h-4 w-4",
@@ -9,8 +8,8 @@ const sizes = {
 };
 
 const variants = {
-  light: "text-white",
-  primary: "text-blue-600",
+  light: "border-gray-900",
+  primary: "border-gray-50",
 };
 
 export type SpinnerProps = {
@@ -24,14 +23,12 @@ export const Spinner = ({
   variant = "primary",
   className = "",
 }: SpinnerProps) => (
-  <>
-    <CgSpinner
-      className={clsx(
-        "animate-spin",
-        sizes[size],
-        variants[variant],
-        className
-      )}
-    />
-  </>
+  <div
+    className={clsx(
+      "animate-spin rounded-full border-b-2",
+      sizes[size],
+      variants[variant],
+      className
+    )}
+  />
 );

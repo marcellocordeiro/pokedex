@@ -10,11 +10,25 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "ignorePatterns": [
+    "next.config.js",
+    "tailwind.config.js",
+    "postcss.config.js"
+  ],
   "rules": {
+    // React
+    "react/destructuring-assignment": "warn",
+    "react/prop-types": "off",
+
+    // eslint
+    "arrow-body-style": "warn",
+    "sort-imports": ["warn", { "ignoreDeclarationSort": true }],
+    "object-shorthand": "warn",
+
     // Typescript
     "@typescript-eslint/prefer-optional-chain": "warn",
-    // Typescript (requires type checking)
+
+    // Typescript with type checking
     "@typescript-eslint/require-await": "warn",
     "@typescript-eslint/consistent-type-exports": "warn",
     "@typescript-eslint/await-thenable": "warn",
@@ -27,12 +41,7 @@
     "@typescript-eslint/unbound-method": "warn",
     "@typescript-eslint/no-inferrable-types": "warn",
 
-    // React
-    "react/destructuring-assignment": "warn",
-
-    "arrow-body-style": "warn",
-    "sort-imports": ["warn", { "ignoreDeclarationSort": true }],
-    "object-shorthand": "warn",
+    // import
     "import/order": [
       "warn",
       {
