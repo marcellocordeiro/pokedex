@@ -1,26 +1,16 @@
-import axios from "axios";
-
 import { Footer } from "@/components/Footer";
 import { Head } from "@/components/Head";
-import { PokemonCard } from "@/features/pokemon/components/PokemonCard";
+import { PokemonCard, getPokemons } from "@/features/pokemon";
 
+import type { PokemonQuery } from "@/features/pokemon";
 import type { GetStaticProps, NextPage } from "next";
 
-type ResType = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: { name: string; url: string }[];
-};
-
 type Props = {
-  data: ResType;
+  data: PokemonQuery[];
 };
 
 const Home: NextPage<Props> = ({ data }) => {
-  const items = data.results.map(({ url }) => (
-    <PokemonCard key={url} url={url} />
-  ));
+  const items = data.map((item) => <PokemonCard key={item.id} data={item} />);
 
   return (
     <div className="py-0 px-8">
@@ -38,22 +28,7 @@ const Home: NextPage<Props> = ({ data }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  type ResType = {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: { name: string; url: string }[];
-  };
-
-  const { data } = await axios.get<ResType>(
-    "https://pokeapi.co/api/v2/pokemon",
-    {
-      params: {
-        offset: 0,
-        limit: 151,
-      },
-    }
-  );
+  const data = await getPokemons();
 
   return { props: { data } };
 };
