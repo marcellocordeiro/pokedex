@@ -8,7 +8,7 @@
     "start": "next start",
     "compile": "tsc",
     "lint:next": "next lint",
-    "lint": "eslint . --fix --ext .js,.ts,.tsx",
+    "lint": "eslint ./src --fix --ext .js,.ts,.tsx",
     "format": "prettier -w ./src"
   },
   "dependencies": {

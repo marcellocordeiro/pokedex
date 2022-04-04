@@ -8,6 +8,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
+      ...defaultTheme.fontFamily,
       sans: ["Inter var", ...defaultTheme.fontFamily.sans],
     },
     extend: {},
