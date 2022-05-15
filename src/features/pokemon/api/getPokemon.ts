@@ -6,15 +6,24 @@ export type PokemonQuery = {
   imageUrl: string;
 };
 
+/*
 const getImageUrl = (id: number) =>
   `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id
     .toString()
     .padStart(3, "0")}.png`;
+*/
 
 export const getPokemon = async (name: string): Promise<PokemonQuery> => {
   type ResType = {
     id: number;
     name: string;
+    sprites: {
+      other: {
+        "official-artwork": {
+          front_default: string;
+        };
+      };
+    };
     [key: string]: unknown;
   };
 
@@ -25,6 +34,6 @@ export const getPokemon = async (name: string): Promise<PokemonQuery> => {
   return {
     id: data.id,
     name: data.name,
-    imageUrl: getImageUrl(data.id),
+    imageUrl: data.sprites.other["official-artwork"].front_default,
   };
 };
