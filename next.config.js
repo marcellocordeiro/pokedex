@@ -3,7 +3,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["raw.githubusercontent.com", "assets.pokemon.com"],
+    domains: ["raw.githubusercontent.com"],
+  },
+  experimental: {
+    newNextLinkBehavior: true,
   },
 };
 
