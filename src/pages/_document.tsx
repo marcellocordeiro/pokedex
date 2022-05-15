@@ -5,6 +5,7 @@ const Document = () => (
     <Head>
       <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
     </Head>
+
     <body>
       <Main />
       <NextScript />
