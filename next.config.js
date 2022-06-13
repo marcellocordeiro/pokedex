@@ -6,6 +6,8 @@ const nextConfig = {
     domains: ["raw.githubusercontent.com"],
   },
   experimental: {
+    legacyBrowsers: false,
+    browsersListForSwc: true,
     newNextLinkBehavior: true,
   },
 };
