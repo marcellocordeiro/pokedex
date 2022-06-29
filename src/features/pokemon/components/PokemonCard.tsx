@@ -1,4 +1,4 @@
-import NextImage from "next/image";
+import NextImage from "next/future/image";
 import NextLink from "next/link";
 
 import { Typography } from "@/components/Elements";
