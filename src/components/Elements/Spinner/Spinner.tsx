@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 
 const sizes = {
   sm: "h-4 w-4",
