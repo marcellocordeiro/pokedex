@@ -5,11 +5,6 @@ const nextConfig = {
   images: {
     domains: ["raw.githubusercontent.com"],
   },
-  experimental: {
-    legacyBrowsers: false,
-    browsersListForSwc: true,
-    newNextLinkBehavior: true,
-  },
 };
 
 module.exports = nextConfig;
